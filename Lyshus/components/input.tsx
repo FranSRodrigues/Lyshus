@@ -56,7 +56,7 @@ const FloatingInput: React.FC<FloatingInputProps> = ({
     }),
     backgroundColor: animatedValue.interpolate({
       inputRange: [0, 1],
-      outputRange: ["transparent", "#003F09"],
+      outputRange: ["transparent", "#acaeadff"],
     }),
     paddingHorizontal: 4,
   };
@@ -88,19 +88,19 @@ const styles = StyleSheet.create({
   input: {
     fontWeight: "500",
     fontSize: 16,
-    width: 325,
-    height: 60,
+    width: 324,
+    height: 54,
     padding: 15,
     borderRadius: 20,
     borderWidth: 3,
     borderColor: "#D9D9D9",
-    backgroundColor: "#003F09",
-    color: "#fff",
-    fontFamily: "Manrope-Regular",
+    backgroundColor: "#FFFFFF",
+    color: "#D9D9D9",
+    fontFamily: "",
   },
   placeholder: {
-    fontFamily: "Manrope-Regular",
-    color: "#fff",
+    fontFamily: "",
+    color: "#D9D9D9",
   },
 });
 
