@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity, Alert } f
 import FloatingInput from "@components/input";
 import { ButtonRoxo } from "@components/buttonLogin";
 import { useRouter } from "expo-router";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-export default function Login() {
+export default function EditarInfo() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,7 +13,7 @@ export default function Login() {
 
     const router = useRouter();
 
-    const handleRegister = () => {
+    const handleSaveInfo = () => {
         if (!email.trim() || !password.trim() || !name.trim()) {
             Alert.alert('Atenção', 'Por favor preencha os campos de email e senha.');
             return;
@@ -33,20 +33,38 @@ export default function Login() {
                     <TouchableOpacity onPress={() => router.back()}>
                         <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
                     </TouchableOpacity>
-                    <Text style={styles.titulo}>Cadastro</Text>
-                    <Text style={styles.subtitulo}>Aproveite o nosso aplicativo!!</Text>
+                    <Text style={styles.titulo}>Editar Informações</Text>
+
                 </View>
 
                 <View style={styles.mainContainer}>
 
                     <View style={styles.formulario}>
+                        <View style={styles.profileImageContainer}>
+                            <TouchableOpacity style={styles.imageWrapper} >
+                                <View style={styles.imagePlaceholder}>
+                                    <MaterialCommunityIcons name="image-multiple" size={50} color="#999999" />
+                                </View>
+                                <View style={styles.cameraIcon}>
+                                    <MaterialCommunityIcons name="camera" size={20} color="#FFFFFF" />
+                                </View>
+                            </TouchableOpacity>
+                        </View>
 
+                        <View style={styles.fieldLabelRow}>
+                            <MaterialCommunityIcons name="account" size={20} color="#666666" />
+                            <Text style={styles.fieldLabel}>Nome:</Text>
+                        </View>
                         <FloatingInput
                             placeholder="Nome"
                             value={name}
                             onChangeText={setName}
                             autoCapitalize="words" />
 
+                        <View style={styles.fieldLabelRow}>
+                            <MaterialCommunityIcons name="email" size={20} color="#666666" />
+                            <Text style={styles.fieldLabel}>Email:</Text>
+                        </View>
                         <FloatingInput
                             placeholder="Email"
                             value={email}
@@ -55,6 +73,10 @@ export default function Login() {
                             autoCapitalize="none"
                         />
 
+                        <View style={styles.fieldLabelRow}>
+                            <MaterialCommunityIcons name="lock" size={20} color="#666666" />
+                            <Text style={styles.fieldLabel}>Senha:</Text>
+                        </View>
                         <FloatingInput
                             placeholder='Senha'
                             value={password}
@@ -64,24 +86,62 @@ export default function Login() {
                         />
                     </View>
 
-                    <ButtonRoxo title={loading ? "Cadastrando..." : "Cadastre-se"} onPress={handleRegister} />
+                    <ButtonRoxo title={loading ? "Salvando Informações..." : "Salvar Informações"} onPress={handleSaveInfo} />
                 </View>
             </ScrollView>
         </>
-
     );
 }
 
 const styles = StyleSheet.create(
     {
+        profileImageContainer: {
+            alignItems: "center",
+            marginVertical: 40,
+        },
+        imageWrapper: {
+            position: "relative",
+        },
+        imagePlaceholder: {
+            width: 120,
+            height: 120,
+            borderRadius: 60,
+            backgroundColor: "#E0E0E0",
+            justifyContent: "center",
+            alignItems: "center",
+            borderWidth: 4,
+            borderColor: "#999999",
+        },
+        cameraIcon: {
+            position: "absolute",
+            bottom: 0,
+            right: 0,
+            width: 36,
+            height: 36,
+            borderRadius: 18,
+            backgroundColor: "#B24BF3",
+            justifyContent: "center",
+            alignItems: "center",
+        },
+        fieldLabelRow: {
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: 12,
+        },
+        fieldLabel: {
+            fontSize: 14,
+            fontWeight: "600",
+            color: "#333333",
+            marginLeft: 8,
+        },
         conteiner: {
             flex: 1,
             backgroundColor: "#F5F5F5",
         },
         mainContainer: {
             flex: 1,
-            justifyContent: "center", // Centraliza verticalmente
-            alignItems: "center", // Centraliza horizontalmente
+            justifyContent: "center",
+            alignItems: "center",
             paddingHorizontal: 20,
             backgroundColor: "#F5F5F5",
         },

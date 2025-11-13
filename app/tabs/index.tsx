@@ -9,11 +9,13 @@ import {
   Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
   const [menuVisible, setMenuVisible] = useState(false);
   const [search, setSearch] = useState('');
 
+  const router = useRouter();
   const handleCategoryPress = (name: string) => {
     alert(`Você clicou em ${name}!`);
   };
@@ -68,7 +70,7 @@ export default function HomeScreen() {
       {/* MENU DE OPÇÕES */}
       {menuVisible && (
         <View style={styles.menu}>
-          <TouchableOpacity style={styles.menuItem}>
+          <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/login/editarInfo')}>
             <Ionicons name="pencil-outline" size={18} color="#000" />
             <Text style={styles.menuText}>Editar informações</Text>
           </TouchableOpacity>
@@ -148,14 +150,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f8f8f8',
-    paddingTop: 40,
   },
   header: {
-    backgroundColor: '#A78BFA',
-    padding: 40,
-    paddingTop: 80,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
+    width: "100%",
+    height: 180,
+    backgroundColor: "#AE77EA",
+    paddingVertical: 40,
+    paddingHorizontal: 20,
+    borderRadius: 20,
   },
   headerRow: {
     flexDirection: 'row',
@@ -163,14 +165,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerTitle: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: '700',
+    fontSize: 40,
+    fontWeight: "700",
+    color: "#FFFFFF",
+    marginBottom: 8,
   },
   headerSubtitle: {
-    color: '#fff',
-    opacity: 0.9,
-    fontSize: 14,
+    fontSize: 12,
+    color: "rgba(255, 255, 255, 0.7)",
   },
   menu: {
     backgroundColor: '#fff',

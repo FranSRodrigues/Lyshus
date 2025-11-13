@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from "react-native";
 import FloatingInput from "@components/input";
 import { ButtonRoxo } from "@components/buttonLogin";
 import { useRouter } from "expo-router";
@@ -13,11 +13,19 @@ export default function Login() {
   const router = useRouter();
 
   const handleLogin = () => {
+    // Validação simples: os dois campos devem estar preenchidos
+    if (!email.trim() || !password.trim()) {
+      Alert.alert('Atenção', 'Por favor preencha os campos de email e senha.');
+      return;
+    }
+
     setLoading(true);
-    // Simulate a login process
+    // Simulate a login process and then navigate to tabs index
     setTimeout(() => {
       setLoading(false);
+      router.push('/tabs');
     }, 1500);
+
   }
   return (
     <>
@@ -76,8 +84,8 @@ const styles = StyleSheet.create(
     },
     mainContainer: {
       flex: 1,
-      justifyContent: "center", // Centraliza verticalmente
-      alignItems: "center", // Centraliza horizontalmente
+      justifyContent: "center", 
+      alignItems: "center", 
       paddingHorizontal: 20,
       backgroundColor: "#F5F5F5",
     },
@@ -97,7 +105,7 @@ const styles = StyleSheet.create(
       marginBottom: 8,
     },
     subtitulo: {
-      fontSize: 12,
+      fontSize: 14,
       color: "rgba(255, 255, 255, 0.7)",
     },
     formulario: {
