@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
-  SafeAreaView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -26,30 +25,34 @@ export default function HomeScreen() {
     {
       id: 1,
       nome: 'Supermercado Sacolão',
-      categoria: 'Supermercado',
-      imagem: '',
+      categoria: 'Supermercados',
+      imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxHMWDyH43D04Wqs-URFR0jTbq9thSnEpbEhwt-_qiLNFgT34szJ5P5Ib7wU8TuChYxTiueHgIiLld1b7B21QOuiMplryJ01B2lzaPLiGrS_hd2mI07fY1ALe7S5-WIXBzRaUE=s1360-w1360-h1020-rw',
       estrelas: 3.1,
+      cor: '#6AEE77',
     },
     {
       id: 2,
-      nome: 'Salão do Reino',
-      categoria: 'Igreja',
-      imagem: 'https://redepara.com.br/imagens/galeria/118801/thumbs/22b76cf0081c4cf791cd2e8a11c3b496.png',
+      nome: 'Doçura',
+      categoria: 'Sorveterias',
+      imagem: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/ec/42/ab/sorveteria-docura.jpg?w=500&h=-1&s=1',
       estrelas: 4.9,
+      cor: '#619FF0',
     },
     {
       id: 3,
       nome: 'Mineirão Atacarejo',
       categoria: 'Supermercado',
-      imagem: 'hhttps://jornaldosudoeste.com.br/admin/assets/images/noticias/2025-03/67d8281f22c7a.webp',
+      imagem: 'https://cdn.samaisvarejo.com.br/portal/image/1714414600525-mineirao-atacarejo.jpeg',
       estrelas: 4.2,
+      cor: '#6AEE77',
     },
     {
       id: 4,
       nome: 'Country Rock Bar',
-      categoria: 'Restaurante',
-      imagem: 'https://images.unsplash.com/photo-1625943555417-92cb5d97e8df?w=800',
+      categoria: 'Bares',
+      imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxTUuYGkX4-Df8YTGv4P68njbZEW5u07VDeinqBeQTfRpttBuhxlABS62ppkhL3TwgH6Yxnx_ZdXuesuvhXYUeHqdHkYHDO2IGMgA2nhGDCt_OKzOXE05rdPZz7Jsn-UxohdDv4=s1360-w1360-h1020-rw',
       estrelas: 3.9,
+      cor: '#F2B579',
     },
   ];
 
@@ -104,15 +107,31 @@ export default function HomeScreen() {
       <View style={styles.categoriesContainer}>
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#FF5151' }]}
-          onPress={() => handleCategoryPress('Restaurantes')}
+          onPress={() => router.push('/tabs/restaurantes')}
         >
           <Ionicons name="restaurant-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Restaurantes</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
+          style={[styles.categoryButton, { backgroundColor: '#FFD665' }]}
+          onPress={() => router.push('/tabs/hoteis')}
+        >
+          <Ionicons name="restaurant-outline" size={24} color="#fff" />
+          <Text style={styles.categoryText}>Hoteis</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.categoryButton, { backgroundColor: '#6AEE77' }]}
+          onPress={() => router.push('/tabs/supermecardos')}
+        >
+          <Ionicons name="restaurant-outline" size={24} color="#fff" />
+          <Text style={styles.categoryText}>Supermercados</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#F2B579' }]}
-          onPress={() => handleCategoryPress('Bares')}
+          onPress={() => router.push('/tabs/bares')}
         >
           <Ionicons name="beer-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Bares</Text>
@@ -120,7 +139,7 @@ export default function HomeScreen() {
 
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#619FF0' }]}
-          onPress={() => handleCategoryPress('Sorveterias')}
+          onPress={() => router.push('/tabs/sorveterias')}
         >
           <Ionicons name="ice-cream-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Sorveterias</Text>
@@ -129,30 +148,23 @@ export default function HomeScreen() {
 
       <Text style={styles.sectionTitle}>Lugares Recomendados</Text>
 
-<SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <ScrollView
-        contentContainerStyle={{
-          paddingVertical: 20,
-          gap: 20,
-          alignItems: "center",
-        }}
-      >
+      <View style={{ paddingVertical: 20, gap: 20, alignItems: "center" }}>
         {lugares.map((lugar) => (
-  <CaixaLocais
-    key={lugar.id}
-    nome={lugar.nome}
-    endereco={lugar.categoria}
-    avaliacao={lugar.estrelas}
-    avaliacoes={Math.floor(Math.random() * 100)}
-    imageUrl={
-      lugar.imagem ||
-      "https://via.placeholder.com/400x200.png?text=Sem+Imagem"
-    }
-    onPress={() => console.log(`Avaliar ${lugar.nome}`)}
-  />))}
-  
-      </ScrollView>
-    </SafeAreaView>
+          <CaixaLocais
+            key={lugar.id}
+            nome={lugar.nome}
+            endereco={lugar.categoria}
+            avaliacao={lugar.estrelas}
+            avaliacoes={Math.floor(Math.random() * 100)}
+            imageUrl={
+              lugar.imagem ||
+              "https://via.placeholder.com/400x200.png?text=Sem+Imagem"
+            }
+            onPress={() => console.log(`Avaliar ${lugar.nome}`)}
+            cor={lugar.cor}
+          />
+        ))}
+      </View>
 
 
       <View style={{ height: 60 }} />

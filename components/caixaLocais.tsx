@@ -8,17 +8,18 @@ interface Props {
   avaliacoes: number;
   imageUrl: string;
   onPress: () => void;
+  cor?: string;
 }
 
-export default function CaixaLocais({ nome, endereco, avaliacao, avaliacoes, imageUrl, onPress }: Props) {
+export default function CaixaLocais({ nome, endereco, avaliacao, avaliacoes, imageUrl, onPress, cor = '#AE77EA' }: Props) {
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, { backgroundColor: cor }]}>
       <Image source={{ uri: imageUrl }} style={styles.cardImage} resizeMode="cover" />
       <View style={styles.cardInfo}>
         <Text style={styles.cardTitle}>{nome}</Text>
         <Text style={styles.cardSubtitle}>{endereco}</Text>
         <View style={styles.starRow}>
-          <Text style={styles.avaliacaoText}>{avaliacao.toFixed(1)} ★</Text>
+          <Text style={styles.avaliacaoText}>★ {avaliacao.toFixed(1)}</Text>
           <Text style={styles.avaliacoesText}>{avaliacoes} avaliações</Text>
         </View>
       </View>
@@ -32,7 +33,7 @@ export default function CaixaLocais({ nome, endereco, avaliacao, avaliacoes, ima
 const styles = StyleSheet.create({
   card: {
     width: '90%',
-    backgroundColor: '#B24BF3',
+    backgroundColor: '#AE77EA',
     borderRadius: 12,
     overflow: 'hidden',
     marginVertical: 8,
@@ -54,11 +55,11 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#222',
+    color: '#ffffffff',
     marginBottom: 4,
   },
   cardSubtitle: {
-    color: '#000000',
+    color: '#ffffffff',
     fontSize: 13,
     marginBottom: 8,
   },
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
    avaliarButton: {
-    backgroundColor: '#4a4a4a',
+    backgroundColor: '#D9D9D9',
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   avaliarButtonText: {
-    color: '#fff',
+    color: '#000000ff',
     fontWeight: '600',
     fontSize: 14,
   },
