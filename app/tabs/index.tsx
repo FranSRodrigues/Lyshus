@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CaixaLocais from "@components/caixaLocais";
 import {
   View,
   Text,
@@ -7,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  SafeAreaView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -127,19 +129,31 @@ export default function HomeScreen() {
 
       <Text style={styles.sectionTitle}>Lugares Recomendados</Text>
 
-      {lugares.map((lugar) => (
-        <View key={lugar.id} style={styles.card}>
-          <Image source={{ uri: lugar.imagem }} style={styles.cardImage} />
-          <View style={styles.cardInfo}>
-            <Text style={styles.cardTitle}>{lugar.nome}</Text>
-            <Text style={styles.cardSubtitle}>{lugar.categoria}</Text>
-            <View style={styles.starRow}>
-              <Ionicons name="star" size={16} color="#FBBF24" />
-              <Text style={styles.starText}>{lugar.estrelas.toFixed(1)}</Text>
-            </View>
-          </View>
-        </View>
-      ))}
+<SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <ScrollView
+        contentContainerStyle={{
+          paddingVertical: 20,
+          gap: 20,
+          alignItems: "center",
+        }}
+      >
+        {lugares.map((lugar) => (
+  <CaixaLocais
+    key={lugar.id}
+    nome={lugar.nome}
+    endereco={lugar.categoria}
+    avaliacao={lugar.estrelas}
+    avaliacoes={Math.floor(Math.random() * 100)}
+    imageUrl={
+      lugar.imagem ||
+      "https://via.placeholder.com/400x200.png?text=Sem+Imagem"
+    }
+    onPress={() => console.log(`Avaliar ${lugar.nome}`)}
+  />))}
+  
+      </ScrollView>
+    </SafeAreaView>
+
 
       <View style={{ height: 60 }} />
     </ScrollView>
