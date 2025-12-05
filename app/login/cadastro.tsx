@@ -4,6 +4,7 @@ import FloatingInput from "@components/input";
 import { ButtonRoxo } from "@components/buttonLogin";
 import { useRouter } from "expo-router";
 import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login() {
     const [name, setName] = useState("");
@@ -13,16 +14,29 @@ export default function Login() {
 
     const router = useRouter();
 
-    const handleRegister = () => {
+    const handleRegister = async () => {
         if (!email.trim() || !password.trim() || !name.trim()) {
-            Alert.alert('Atenção', 'Por favor preencha os campos de email e senha.');
+            Alert.alert('Atenção', 'Por favor preencha todos os campos.');
             return;
         }
         setLoading(true)
         // Aqui você adicionaria a lógica de cadastro
-        setTimeout(() => {
-            setLoading(false)
-            router.push('/login')
+        setTimeout(async () => {
+            try {
+                // Salvar dados no AsyncStorage
+                await AsyncStorage.multiSet([
+                    ['userEmail', email],
+                    ['userName', name],
+                    ['isLoggedIn', 'true']
+                ]);
+                
+                setLoading(false)
+                router.push('/tabs')
+            } catch (error) {
+                console.error('Erro ao salvar dados:', error);
+                setLoading(false)
+                Alert.alert('Erro', 'Não foi possível salvar os dados.')
+            }
         }, 1500)
     }
     return (

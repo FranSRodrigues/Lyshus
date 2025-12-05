@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CaixaLocais from "@components/caixaLocais";
 import {
   View,
@@ -10,13 +10,33 @@ import {
   Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen() {
   const [menuVisible, setMenuVisible] = useState(false);
   const [search, setSearch] = useState('');
+  const [userName, setUserName] = useState('User');
 
   const router = useRouter();
+
+  // Carregar nome do usuário quando a tela recebe foco
+  useFocusEffect(
+    React.useCallback(() => {
+      const loadUserName = async () => {
+        try {
+          const savedName = await AsyncStorage.getItem('userName');
+          if (savedName) {
+            setUserName(savedName);
+          }
+        } catch (error) {
+          console.error('Erro ao carregar nome do usuário:', error);
+        }
+      };
+      loadUserName();
+    }, [])
+  );
+
   const handleCategoryPress = (name: string) => {
     alert(`Você clicou em ${name}!`);
   };
@@ -62,7 +82,7 @@ export default function HomeScreen() {
       <View style={styles.header}>
         <View style={styles.headerRow}>
           <View>
-            <Text style={styles.headerTitle}>Hi, User!</Text>
+            <Text style={styles.headerTitle}>Olá, {userName}!</Text>
             <Text style={styles.headerSubtitle}>lyshus</Text>
           </View>
 
@@ -80,7 +100,10 @@ export default function HomeScreen() {
             <Text style={styles.menuText}>Editar informações</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.menuItem}>
+          <TouchableOpacity style={styles.menuItem} onPress={async () => {
+            await AsyncStorage.multiRemove(['userEmail', 'userName', 'isLoggedIn']);
+            router.replace('/login');
+          }}>
             <Ionicons name="log-out-outline" size={18} color="#000" />
             <Text style={styles.menuText}>Sair da conta</Text>
           </TouchableOpacity>

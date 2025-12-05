@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, ScrollView, TouchableOpacity, Alert } from "react-native";
 import FloatingInput from "@components/input";
 import { ButtonRoxo } from "@components/buttonLogin";
 import { useRouter } from "expo-router";
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function EditarInfo() {
     const [name, setName] = useState("");
@@ -13,16 +14,44 @@ export default function EditarInfo() {
 
     const router = useRouter();
 
-    const handleSaveInfo = () => {
+    useEffect(() => {
+        // Carregar dados salvos do AsyncStorage
+        const loadUserData = async () => {
+            try {
+                const savedEmail = await AsyncStorage.getItem('userEmail');
+                const savedName = await AsyncStorage.getItem('userName');
+                if (savedEmail) setEmail(savedEmail);
+                if (savedName) setName(savedName);
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+            }
+        };
+        loadUserData();
+    }, []);
+
+    const handleSaveInfo = async () => {
         if (!email.trim() || !password.trim() || !name.trim()) {
-            Alert.alert('Atenção', 'Por favor preencha os campos de email e senha.');
+            Alert.alert('Atenção', 'Por favor preencha todos os campos.');
             return;
         }
         setLoading(true)
-        // Aqui você adicionaria a lógica de cadastro
-        setTimeout(() => {
-            setLoading(false)
-            router.push('/login')
+        // Aqui você adicionaria a lógica de atualização
+        setTimeout(async () => {
+            try {
+                // Salvar dados atualizados no AsyncStorage
+                await AsyncStorage.multiSet([
+                    ['userEmail', email],
+                    ['userName', name],
+                ]);
+                
+                setLoading(false)
+                Alert.alert('Sucesso', 'Informações salvas com sucesso!')
+                router.back()
+            } catch (error) {
+                console.error('Erro ao salvar dados:', error);
+                setLoading(false)
+                Alert.alert('Erro', 'Não foi possível salvar os dados.')
+            }
         }, 1500)
     }
     return (
