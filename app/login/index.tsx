@@ -20,6 +20,12 @@ export default function Login() {
       return;
     }
 
+    // Validação: email deve ser @gmail.com
+    if (!email.endsWith('@gmail.com')) {
+      Alert.alert('Email inválido', 'Por favor use um email @gmail.com');
+      return;
+    }
+
     setLoading(true);
     // Simulate a login process and then navigate to tabs index
     setTimeout(async () => {

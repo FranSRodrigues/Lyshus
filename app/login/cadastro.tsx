@@ -19,6 +19,12 @@ export default function Login() {
             Alert.alert('Atenção', 'Por favor preencha todos os campos.');
             return;
         }
+
+        // Validação: email deve ser @gmail.com
+        if (!email.endsWith('@gmail.com')) {
+            Alert.alert('Email inválido', 'Por favor use um email @gmail.com');
+            return;
+        }
         setLoading(true)
         // Aqui você adicionaria a lógica de cadastro
         setTimeout(async () => {
@@ -31,7 +37,7 @@ export default function Login() {
                 ]);
                 
                 setLoading(false)
-                router.push('/tabs')
+                router.push('/login')
             } catch (error) {
                 console.error('Erro ao salvar dados:', error);
                 setLoading(false)
