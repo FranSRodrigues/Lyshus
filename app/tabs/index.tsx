@@ -107,7 +107,7 @@ export default function HomeScreen() {
       <View style={styles.categoriesContainer}>
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#FF5151' }]}
-          onPress={() => router.push('/tabs/restaurantes')}
+          onPress={() => router.push('/categorias/restaurantes')}
         >
           <Ionicons name="restaurant-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Restaurantes</Text>
@@ -115,7 +115,7 @@ export default function HomeScreen() {
 
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#FFD665' }]}
-          onPress={() => router.push('/tabs/hoteis')}
+          onPress={() => router.push('/categorias/hoteis')}
         >
           <Ionicons name="restaurant-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Hoteis</Text>
@@ -123,7 +123,7 @@ export default function HomeScreen() {
 
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#6AEE77' }]}
-          onPress={() => router.push('/tabs/supermecardos')}
+          onPress={() => router.push('/categorias/supermecardos')}
         >
           <Ionicons name="restaurant-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Supermercados</Text>
@@ -131,7 +131,7 @@ export default function HomeScreen() {
 
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#F2B579' }]}
-          onPress={() => router.push('/tabs/bares')}
+          onPress={() => router.push('/categorias/bares')}
         >
           <Ionicons name="beer-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Bares</Text>
@@ -139,7 +139,7 @@ export default function HomeScreen() {
 
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#619FF0' }]}
-          onPress={() => router.push('/tabs/sorveterias')}
+          onPress={() => router.push('/categorias/sorveterias')}
         >
           <Ionicons name="ice-cream-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Sorveterias</Text>
