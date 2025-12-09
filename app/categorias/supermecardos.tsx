@@ -29,34 +29,38 @@ export default function EditarInfo() {
         {
             id: 1,
             nome: 'Supermercado Sacolão',
-            categoria: 'Supermercado',
+            endereco: 'R. Hermano Souza, 246 - Centro, Almenara - MG, 39900-000',
             imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxHMWDyH43D04Wqs-URFR0jTbq9thSnEpbEhwt-_qiLNFgT34szJ5P5Ib7wU8TuChYxTiueHgIiLld1b7B21QOuiMplryJ01B2lzaPLiGrS_hd2mI07fY1ALe7S5-WIXBzRaUE=s1360-w1360-h1020-rw',
-            estrelas: 3.1,
+            estrelas: 4.1,
             cor: '#6AEE77',
+            avaliacoes: 318,
         },
         {
             id: 2,
-            nome: 'Salão do Reino',
-            categoria: 'Igreja',
-            imagem: 'https://redepara.com.br/imagens/galeria/118801/thumbs/22b76cf0081c4cf791cd2e8a11c3b496.png',
-            estrelas: 4.9,
+            nome: 'Supermercado Boa Compra',
+            endereco: 'R. Argemiro Aguilar, 618 - Almenara, MG, 39900-000',
+            imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSz4RVDlgDfDU6WNlOSbaY5Wu9joTs9vAOtoBXjg2eOdeJRWjREdJDGLj2COo7pdtkpO1PekBgrvqgWD5D6HUJpP7FzfAvavy0Le7okJ0Jn0-luwAaMUwYU2SEPGOY-EfPwD0PfgRw=s1360-w1360-h1020-rw',
+            estrelas: 4.2,
             cor: '#6AEE77',
+            avaliacoes: 348,
         },
         {
             id: 3,
             nome: 'Mineirão Atacarejo',
-            categoria: 'Supermercado',
+            endereco: ' BR-367, KM113 , n°58 - A - Cidade Nova, Almenara - MG, 39900-000',
             imagem: 'https://cdn.samaisvarejo.com.br/portal/image/1714414600525-mineirao-atacarejo.jpeg',
-            estrelas: 4.2,
+            estrelas: 4.4,
             cor: '#6AEE77',
+            avaliacoes: 1106,
         },
         {
             id: 4,
-            nome: 'Country Rock Bar',
-            categoria: 'Restaurante',
-            imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxTUuYGkX4-Df8YTGv4P68njbZEW5u07VDeinqBeQTfRpttBuhxlABS62ppkhL3TwgH6Yxnx_ZdXuesuvhXYUeHqdHkYHDO2IGMgA2nhGDCt_OKzOXE05rdPZz7Jsn-UxohdDv4=s1360-w1360-h1020-rw',
+            nome: 'Xereta Supermercados',
+            endereco: 'R. Severiano Coutinho, 275 - Centro, Almenara - MG, 39900-000',
+            imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxPzxe2ZLjVTfAZZLf_JBnWZed8dvPHsv0osV7XhJA6uxJVf3DR8V2AWYRhR4pqqwO0AJIbMsjmlszC0yJkMAOIY1e39F3celjPL-FALIl7htVUGAY3nxGcpWpCLnqKG-yYfEV7=s1360-w1360-h1020-rw',
             estrelas: 3.9,
             cor: '#6AEE77',
+            avaliacoes: 672,
         },
     ];
     return (
@@ -64,12 +68,14 @@ export default function EditarInfo() {
             <ScrollView style={styles.conteiner} >
 
                 <View style={styles.cabecalho}>
-                    <TouchableOpacity onPress={() => router.back()}>
+                    <TouchableOpacity onPress={() => router.back()} style={styles.arrowContainer}>
                         <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
                     </TouchableOpacity>
-                    <Text style={styles.titulo}>Supermercados</Text>
-
+                    <View style={styles.textoContainer}>
+                        <Text style={styles.titulo}>Supermecardos</Text>
+                    </View>
                 </View>
+
 
 
                 <View style={{ paddingVertical: 20, gap: 20, alignItems: "center" }}>
@@ -77,9 +83,9 @@ export default function EditarInfo() {
                         <CaixaLocais
                             key={lugar.id}
                             nome={lugar.nome}
-                            endereco={lugar.categoria}
+                            endereco={lugar.endereco}
                             avaliacao={lugar.estrelas}
-                            avaliacoes={Math.floor(Math.random() * 100)}
+                            avaliacoes={lugar.avaliacoes}
                             imageUrl={
                                 lugar.imagem ||
                                 "https://via.placeholder.com/400x200.png?text=Sem+Imagem"
@@ -97,7 +103,7 @@ export default function EditarInfo() {
 }
 
 const styles = StyleSheet.create(
-    {   
+    {
         conteiner: {
             flex: 1,
             backgroundColor: "#F5F5F5",
@@ -112,11 +118,20 @@ const styles = StyleSheet.create(
         cabecalho: {
             width: "100%",
             height: 180,
-            alignItems: "center",
             backgroundColor: "#6AEE77",
             paddingVertical: 40,
             paddingHorizontal: 20,
             borderRadius: 20,
+            flexDirection: "row",
+            alignItems: "flex-start",
+        },
+        arrowContainer: {
+            paddingRight: 10,
+            paddingTop: 5,
+        },
+        textoContainer: {
+            flex: 1,
+            alignItems: "center",
         },
         titulo: {
             fontSize: 40,
