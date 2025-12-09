@@ -32,7 +32,7 @@ export default function EditarInfo() {
             endereco: 'R. Bias Fortes, 778 - Centro, Almenara - MG, 39900-000',
             imagem: 'https://lh3.googleusercontent.com/p/AF1QipPdOWKm9Wu0P-fxyUjDo46fAUfjKGXkShVtC0nF=s1360-w1360-h1020-rw',
             estrelas: 4.6,
-            cor: '#F2B579',
+            cor: '#f69d45ff',
             avaliacoes: 342,
         },
         {
@@ -41,7 +41,7 @@ export default function EditarInfo() {
             endereco: 'Av. Olindo de Miranda, 535 - CENTRO, Almenara - MG, 39900-000',
             imagem: 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=6d_OqxbfR5StXTiPYzgbNw&cb_client=search.gws-prod.gps&yaw=287.9493&pitch=0&thumbfov=100&w=325&h=218',
             estrelas: 4.7,
-            cor: '#F2B579',
+            cor: '#f69d45ff',
             avaliacoes: 18,
         },
         {
@@ -50,7 +50,7 @@ export default function EditarInfo() {
             endereco: 'Av. Dr. Carmosino Ferreira Costa - Almenara, MG, 39900-000',
             imagem: 'https://lh3.googleusercontent.com/p/AF1QipPZofsrV_lpvSQ3Ykizdo-0KOHcfHgU-CF949xc=s1360-w1360-h1020-rw',
             estrelas: 4.6,
-            cor: '#F2B579',
+            cor: '#f69d45ff',
             avaliacoes: 8,
         },
         {
@@ -59,7 +59,7 @@ export default function EditarInfo() {
             endereco: 'Tv. Liberdade, 25 - Centro, Almenara - MG, 39900-000',
             imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxTUuYGkX4-Df8YTGv4P68njbZEW5u07VDeinqBeQTfRpttBuhxlABS62ppkhL3TwgH6Yxnx_ZdXuesuvhXYUeHqdHkYHDO2IGMgA2nhGDCt_OKzOXE05rdPZz7Jsn-UxohdDv4=s1360-w1360-h1020-rw',
             estrelas: 4.6,
-            cor: '#F2B579',
+            cor: '#f69d45ff',
             avaliacoes: 173,
         },
     ];
@@ -116,7 +116,7 @@ const styles = StyleSheet.create(
          cabecalho: {
             width: "100%",
             height: 180,
-            backgroundColor: "#F2B579",
+            backgroundColor: "#f69d45ff",
             paddingVertical: 40,
             paddingHorizontal: 20,
             borderRadius: 20,

@@ -42,7 +42,7 @@ export default function HomeScreen() {
       endereco: 'R. Hermano Souza, 246 - Centro, Almenara - MG',
       imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxHMWDyH43D04Wqs-URFR0jTbq9thSnEpbEhwt-_qiLNFgT34szJ5P5Ib7wU8TuChYxTiueHgIiLld1b7B21QOuiMplryJ01B2lzaPLiGrS_hd2mI07fY1ALe7S5-WIXBzRaUE=s1360-w1360-h1020-rw',
       estrelas: 4.1,
-      cor: '#6AEE77',
+      cor: '#00b312ff',
       avaliacoes: 318,
     },
     {
@@ -60,7 +60,7 @@ export default function HomeScreen() {
       endereco: 'BR-367, KM113, n°58 - Cidade Nova, Almenara - MG',
       imagem: 'https://cdn.samaisvarejo.com.br/portal/image/1714414600525-mineirao-atacarejo.jpeg',
       estrelas: 4.4,
-      cor: '#6AEE77',
+      cor: '#00b312ff',
       avaliacoes: 1106,
     },
     {
@@ -69,7 +69,7 @@ export default function HomeScreen() {
       endereco: 'Tv. Liberdade, 25 - Centro, Almenara - MG',
       imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxTUuYGkX4-Df8YTGv4P68njbZEW5u07VDeinqBeQTfRpttBuhxlABS62ppkhL3TwgH6Yxnx_ZdXuesuvhXYUeHqdHkYHDO2IGMgA2nhGDCt_OKzOXE05rdPZz7Jsn-UxohdDv4=s1360-w1360-h1020-rw',
       estrelas: 4.6,
-      cor: '#F2B579',
+      cor: '#f69d45ff',
       avaliacoes: 173,
     },
   ];
@@ -138,7 +138,7 @@ export default function HomeScreen() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.categoryButton, { backgroundColor: '#FFD665' }]}
+          style={[styles.categoryButton, { backgroundColor: '#f35810ff' }]}
           onPress={() => router.push('/categorias/hoteis')}
         >
           <Ionicons name="bed-outline" size={24} color="#fff" />
@@ -146,7 +146,7 @@ export default function HomeScreen() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.categoryButton, { backgroundColor: '#6AEE77' }]}
+          style={[styles.categoryButton, { backgroundColor: '#00b312ff' }]}
           onPress={() => router.push('/categorias/supermercados')}
         >
           <Ionicons name="cart-outline" size={24} color="#fff" />
@@ -156,7 +156,7 @@ export default function HomeScreen() {
 
       <View style={styles.categoriesContainer}>
         <TouchableOpacity
-          style={[styles.categoryButton, { backgroundColor: '#F2B579' }]}
+          style={[styles.categoryButton, { backgroundColor: '#f69d45ff' }]}
           onPress={() => router.push('/categorias/bares')}
         >
           <Ionicons name="beer-outline" size={24} color="#fff" />

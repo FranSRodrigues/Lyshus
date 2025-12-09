@@ -33,7 +33,7 @@ export default function Hoteis() {
             endereco: 'Av. Olindo de Miranda, 700 - Almenara, MG, 39900-000',
             imagem: 'https://lh3.googleusercontent.com/p/AF1QipPmF8uxGps7NwA_PjMUga0HGzBjyHI3NeWeRh-W=s1360-w1360-h1020-rw',
             estrelas: 4.0,
-            cor: '#FFD665',
+            cor: '#f35810ff',
             avaliacoes: 609,
         },
         {
@@ -42,7 +42,7 @@ export default function Hoteis() {
             endereco: 'R. Argemiro Aguilar, 378 - Centro, Almenara - MG, 39900-000',
             imagem: 'https://lh3.googleusercontent.com/p/AF1QipMHkOSOGFSH0HCsmp8Pxvcuu30TY0ukdldMMhjD=w574-h384-n-k-rw-no-v1',
             estrelas: 4.4,
-            cor: '#FFD665',
+            cor: '#f35810ff',
             avaliacoes: 117,
         },
         {
@@ -51,7 +51,7 @@ export default function Hoteis() {
             endereco: 'R. Benvindo Saúde, 23 - São Judas Tadeu, Almenara - MG, 39900-000',
             imagem: 'https://lh3.googleusercontent.com/p/AF1QipPz8d7szXFmS2CFUsE1Y-p5AG3RyyRm-RKtvG-v=w324-h312-n-k-no',
             estrelas: 4.2,
-            cor: '#FFD665',
+            cor: '#f35810ff',
             avaliacoes: 74,
         },
         {
@@ -60,7 +60,7 @@ export default function Hoteis() {
             endereco: 'R. Hermano Souza, 63 - Almenara, MG, 39900-000',
             imagem: 'https://lh3.googleusercontent.com/p/AF1QipOfxLBf34Hx5Cxoyg4foWVLChDTR2JQYlNCiSPc=s1360-w1360-h1020-rw',
             estrelas: 3.7,
-            cor: '#FFD665',
+            cor: '#f35810ff',
             avaliacoes: 39,
         },
     ];
@@ -118,7 +118,7 @@ const styles = StyleSheet.create(
          cabecalho: {
             width: "100%",
             height: 180,
-            backgroundColor: "#FFD665",
+            backgroundColor: "#f35810ff",
             paddingVertical: 40,
             paddingHorizontal: 20,
             borderRadius: 20,

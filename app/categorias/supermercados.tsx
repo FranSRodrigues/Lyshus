@@ -32,7 +32,7 @@ export default function EditarInfo() {
             endereco: 'R. Hermano Souza, 246 - Centro, Almenara - MG, 39900-000',
             imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxHMWDyH43D04Wqs-URFR0jTbq9thSnEpbEhwt-_qiLNFgT34szJ5P5Ib7wU8TuChYxTiueHgIiLld1b7B21QOuiMplryJ01B2lzaPLiGrS_hd2mI07fY1ALe7S5-WIXBzRaUE=s1360-w1360-h1020-rw',
             estrelas: 4.1,
-            cor: '#6AEE77',
+            cor: '#00b312ff',
             avaliacoes: 318,
         },
         {
@@ -41,7 +41,7 @@ export default function EditarInfo() {
             endereco: 'R. Argemiro Aguilar, 618 - Almenara, MG, 39900-000',
             imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSz4RVDlgDfDU6WNlOSbaY5Wu9joTs9vAOtoBXjg2eOdeJRWjREdJDGLj2COo7pdtkpO1PekBgrvqgWD5D6HUJpP7FzfAvavy0Le7okJ0Jn0-luwAaMUwYU2SEPGOY-EfPwD0PfgRw=s1360-w1360-h1020-rw',
             estrelas: 4.2,
-            cor: '#6AEE77',
+            cor: '#00b312ff',
             avaliacoes: 348,
         },
         {
@@ -50,7 +50,7 @@ export default function EditarInfo() {
             endereco: ' BR-367, KM113 , n°58 - A - Cidade Nova, Almenara - MG, 39900-000',
             imagem: 'https://cdn.samaisvarejo.com.br/portal/image/1714414600525-mineirao-atacarejo.jpeg',
             estrelas: 4.4,
-            cor: '#6AEE77',
+            cor: '#00b312ff',
             avaliacoes: 1106,
         },
         {
@@ -59,7 +59,7 @@ export default function EditarInfo() {
             endereco: 'R. Severiano Coutinho, 275 - Centro, Almenara - MG, 39900-000',
             imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxPzxe2ZLjVTfAZZLf_JBnWZed8dvPHsv0osV7XhJA6uxJVf3DR8V2AWYRhR4pqqwO0AJIbMsjmlszC0yJkMAOIY1e39F3celjPL-FALIl7htVUGAY3nxGcpWpCLnqKG-yYfEV7=s1360-w1360-h1020-rw',
             estrelas: 3.9,
-            cor: '#6AEE77',
+            cor: '#00b312ff',
             avaliacoes: 672,
         },
     ];
@@ -118,7 +118,7 @@ const styles = StyleSheet.create(
         cabecalho: {
             width: "100%",
             height: 180,
-            backgroundColor: "#6AEE77",
+            backgroundColor: "#00b312ff",
             paddingVertical: 40,
             paddingHorizontal: 20,
             borderRadius: 20,
