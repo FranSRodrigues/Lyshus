@@ -22,6 +22,7 @@ export default function AvaliarScreen() {
   const [comment, setComment] = useState('');
   const [userName, setUserName] = useState('Usuário');
   const [lugarInfo, setLugarInfo] = useState<any>(null);
+  const [comentarios, setComentarios] = useState<any[]>([]);
 
   useEffect(() => {
     const loadUserName = async () => {
@@ -119,6 +120,19 @@ export default function AvaliarScreen() {
     if (lugar) {
       setLugarInfo(lugar);
     }
+    
+    // Carregar comentários salvos
+    const carregarComentarios = async () => {
+      try {
+        const data = await AsyncStorage.getItem(`COMENTARIOS_${nome}`);
+        if (data) {
+          setComentarios(JSON.parse(data));
+        }
+      } catch (error) {
+        console.error('Erro ao carregar comentários:', error);
+      }
+    };
+    carregarComentarios();
   }, [nome]);
 
   const handleSubmit = async () => {
@@ -139,11 +153,27 @@ export default function AvaliarScreen() {
 
       avaliacoes[nome].push(rating);
 
-      // Salvar no AsyncStorage
+      // Salvar avaliações
       await AsyncStorage.setItem('AVALIACOES', JSON.stringify(avaliacoes));
 
+      // Salvar comentário se preenchido
+      if (comment.trim()) {
+        const novoComentario = {
+          usuario: userName,
+          estrelas: rating,
+          texto: comment,
+          data: new Date().toLocaleDateString('pt-BR'),
+        };
+
+        const comentariosAtuais = [...comentarios, novoComentario];
+        await AsyncStorage.setItem(`COMENTARIOS_${nome}`, JSON.stringify(comentariosAtuais));
+        setComentarios(comentariosAtuais);
+      }
+
       Alert.alert('Sucesso', 'Avaliação enviada com sucesso!');
-      router.back();
+      setRating(0);
+      setComment('');
+      
     } catch (error) {
       console.error('Erro ao salvar avaliação:', error);
       Alert.alert('Erro', 'Não foi possível salvar a avaliação.');
@@ -160,7 +190,7 @@ export default function AvaliarScreen() {
 
   return (
     <ScrollView style={styles.container}>
-      {/* HEADER */}
+
       <View style={[styles.header, { backgroundColor: lugarInfo.cor }]}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
@@ -170,7 +200,7 @@ export default function AvaliarScreen() {
         </View>
       </View>
 
-      {/* LUGAR INFO CARD */}
+
       <View style={[styles.lugarCard, { backgroundColor: lugarInfo.cor }]}>
         <Image
           source={{ uri: lugarInfo.imagem }}
@@ -190,9 +220,8 @@ export default function AvaliarScreen() {
         </View>
       </View>
 
-      {/* CONTENT */}
       <View style={styles.content}>
-        {/* USER INFO */}
+      
         <View style={styles.userInfo}>
           <View style={styles.userAvatar}>
             <Ionicons name="person-circle-outline" size={50} color={lugarInfo.cor} />
@@ -203,7 +232,6 @@ export default function AvaliarScreen() {
           </View>
         </View>
 
-        {/* STARS RATING */}
         <View style={styles.ratingSection}>
           <Text style={styles.ratingLabel}>Sua Avaliação:</Text>
           <View style={styles.starsContainer}>
@@ -224,7 +252,6 @@ export default function AvaliarScreen() {
           </Text>
         </View>
 
-        {/* COMMENT */}
         <View style={styles.commentSection}>
           <Text style={styles.commentLabel}>Comentário (opcional):</Text>
           <TextInput
@@ -239,13 +266,44 @@ export default function AvaliarScreen() {
           />
         </View>
 
-        {/* SUBMIT BUTTON */}
         <TouchableOpacity
           style={[styles.submitButton, { backgroundColor: lugarInfo.cor }]}
           onPress={handleSubmit}
         >
           <Text style={styles.submitButtonText}>Enviar Avaliação</Text>
         </TouchableOpacity>
+
+        {/* COMENTÁRIOS ENVIADOS */}
+        {comentarios.length > 0 && (
+          <View style={styles.commentsSection}>
+            <Text style={styles.commentsTitle}>Avaliações ({comentarios.length})</Text>
+            {comentarios.map((comentario, index) => (
+              <View key={index} style={styles.commentCard}>
+                <View style={styles.commentHeader}>
+                  <View>
+                    <Text style={styles.commentUserName}>{comentario.usuario}</Text>
+                    <Text style={styles.commentDate}>{comentario.data}</Text>
+                  </View>
+                </View>
+                <View style={styles.commentStars}>
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Text
+                      key={star}
+                      style={{
+                        fontSize: 16,
+                        color: star <= comentario.estrelas ? '#FFD665' : '#DDD',
+                        marginRight: 2,
+                      }}
+                    >
+                      ★
+                    </Text>
+                  ))}
+                </View>
+                <Text style={styles.commentText}>{comentario.texto}</Text>
+              </View>
+            ))}
+          </View>
+        )}
       </View>
 
       <View style={{ height: 30 }} />
@@ -419,5 +477,45 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     color: '#FFF',
+  },
+  commentsSection: {
+    marginTop: 30,
+    marginBottom: 20,
+  },
+  commentsTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#333',
+    marginBottom: 15,
+  },
+  commentCard: {
+    backgroundColor: '#FFF',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 12,
+    borderLeftWidth: 4,
+    borderLeftColor: '#AE77EA',
+  },
+  commentHeader: {
+    marginBottom: 10,
+  },
+  commentUserName: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 4,
+  },
+  commentDate: {
+    fontSize: 12,
+    color: '#999',
+  },
+  commentStars: {
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  commentText: {
+    fontSize: 13,
+    color: '#666',
+    lineHeight: 20,
   },
 });
