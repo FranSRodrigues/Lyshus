@@ -30,13 +30,8 @@ export default function EditarInfo() {
     }, []);
 
     const handleSaveInfo = async () => {
-        if (!email.trim() || !password.trim() || !name.trim()) {
-            Alert.alert('Atenção', 'Por favor preencha todos os campos.');
-            return;
-        }
-
-        // Validação: email deve ser @gmail.com
-        if (!email.endsWith('@gmail.com')) {
+        // Validação: se preencheu email, deve ser @gmail.com
+        if (email.trim() && !email.endsWith('@gmail.com')) {
             Alert.alert('Email inválido', 'Por favor use um email @gmail.com');
             return;
         }

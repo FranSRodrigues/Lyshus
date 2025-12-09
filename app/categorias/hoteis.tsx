@@ -4,8 +4,9 @@ import FloatingInput from "@components/input";
 import { useRouter } from "expo-router";
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import CaixaLocais from "@components/caixaLocais";
+import { advanceAnimationByFrame } from "react-native-reanimated";
 
-export default function EditarInfo() {
+export default function Hoteis() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -28,35 +29,39 @@ export default function EditarInfo() {
     const lugares = [
         {
             id: 1,
-            nome: 'Supermercado Sacolão',
-            categoria: 'Supermercado',
-            imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxHMWDyH43D04Wqs-URFR0jTbq9thSnEpbEhwt-_qiLNFgT34szJ5P5Ib7wU8TuChYxTiueHgIiLld1b7B21QOuiMplryJ01B2lzaPLiGrS_hd2mI07fY1ALe7S5-WIXBzRaUE=s1360-w1360-h1020-rw',
-            estrelas: 3.1,
+            nome: 'Pousada Sol Nascente',
+            endereco: 'Av. Olindo de Miranda, 700 - Almenara, MG, 39900-000',
+            imagem: 'https://lh3.googleusercontent.com/p/AF1QipPmF8uxGps7NwA_PjMUga0HGzBjyHI3NeWeRh-W=s1360-w1360-h1020-rw',
+            estrelas: 4.0,
             cor: '#FFD665',
+            avaliacoes: 609,
         },
         {
             id: 2,
-            nome: 'Salão do Reino',
-            categoria: 'Igreja',
-            imagem: 'https://redepara.com.br/imagens/galeria/118801/thumbs/22b76cf0081c4cf791cd2e8a11c3b496.png',
-            estrelas: 4.9,
+            nome: 'Pousada Onhas do Jequi',
+            endereco: 'R. Argemiro Aguilar, 378 - Centro, Almenara - MG, 39900-000',
+            imagem: 'https://lh3.googleusercontent.com/p/AF1QipMHkOSOGFSH0HCsmp8Pxvcuu30TY0ukdldMMhjD=w574-h384-n-k-rw-no-v1',
+            estrelas: 4.4,
             cor: '#FFD665',
+            avaliacoes: 117,
         },
         {
             id: 3,
-            nome: 'Mineirão Atacarejo',
-            categoria: 'Supermercado',
-            imagem: 'https://cdn.samaisvarejo.com.br/portal/image/1714414600525-mineirao-atacarejo.jpeg',
+            nome: 'Pousada Encantado',
+            endereco: 'R. Benvindo Saúde, 23 - São Judas Tadeu, Almenara - MG, 39900-000',
+            imagem: 'https://lh3.googleusercontent.com/p/AF1QipPz8d7szXFmS2CFUsE1Y-p5AG3RyyRm-RKtvG-v=w324-h312-n-k-no',
             estrelas: 4.2,
             cor: '#FFD665',
+            avaliacoes: 74,
         },
         {
             id: 4,
-            nome: 'Country Rock Bar',
-            categoria: 'Restaurante',
-            imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxTUuYGkX4-Df8YTGv4P68njbZEW5u07VDeinqBeQTfRpttBuhxlABS62ppkhL3TwgH6Yxnx_ZdXuesuvhXYUeHqdHkYHDO2IGMgA2nhGDCt_OKzOXE05rdPZz7Jsn-UxohdDv4=s1360-w1360-h1020-rw',
-            estrelas: 3.9,
+            nome: 'Pousada Souza',
+            endereco: 'R. Hermano Souza, 63 - Almenara, MG, 39900-000',
+            imagem: 'https://lh3.googleusercontent.com/p/AF1QipOfxLBf34Hx5Cxoyg4foWVLChDTR2JQYlNCiSPc=s1360-w1360-h1020-rw',
+            estrelas: 3.7,
             cor: '#FFD665',
+            avaliacoes: 39,
         },
     ];
     return (
@@ -64,11 +69,12 @@ export default function EditarInfo() {
             <ScrollView style={styles.conteiner} >
 
                 <View style={styles.cabecalho}>
-                    <TouchableOpacity onPress={() => router.back()}>
+                    <TouchableOpacity onPress={() => router.back()} style={styles.arrowContainer}>
                         <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
                     </TouchableOpacity>
-                    <Text style={styles.titulo}>Hoteis</Text>
-
+                    <View style={styles.textoContainer}>
+                        <Text style={styles.titulo}>Hoteis</Text>
+                    </View>
                 </View>
 
 
@@ -77,9 +83,9 @@ export default function EditarInfo() {
                         <CaixaLocais
                             key={lugar.id}
                             nome={lugar.nome}
-                            endereco={lugar.categoria}
+                            endereco={lugar.endereco}
                             avaliacao={lugar.estrelas}
-                            avaliacoes={Math.floor(Math.random() * 100)}
+                            avaliacoes={lugar.avaliacoes || 0}
                             imageUrl={
                                 lugar.imagem ||
                                 "https://via.placeholder.com/400x200.png?text=Sem+Imagem"
@@ -97,7 +103,7 @@ export default function EditarInfo() {
 }
 
 const styles = StyleSheet.create(
-    {   
+    {
         conteiner: {
             flex: 1,
             backgroundColor: "#F5F5F5",
@@ -109,14 +115,23 @@ const styles = StyleSheet.create(
             paddingHorizontal: 20,
             backgroundColor: "#F5F5F5",
         },
-        cabecalho: {
+         cabecalho: {
             width: "100%",
             height: 180,
-            alignItems: "center",
             backgroundColor: "#FFD665",
             paddingVertical: 40,
             paddingHorizontal: 20,
             borderRadius: 20,
+            flexDirection: "row",
+            alignItems: "flex-start",
+        },
+        arrowContainer: {
+            paddingRight: 10,
+            paddingTop: 5,
+        },
+        textoContainer: {
+            flex: 1,
+            alignItems: "center",
         },
         titulo: {
             fontSize: 40,

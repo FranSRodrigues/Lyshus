@@ -26,7 +26,7 @@ export default function Login() {
             return;
         }
         setLoading(true)
-        // Aqui você adicionaria a lógica de cadastro
+
         setTimeout(async () => {
             try {
                 // Salvar dados no AsyncStorage
@@ -50,11 +50,13 @@ export default function Login() {
             <ScrollView style={styles.conteiner} >
 
                 <View style={styles.cabecalho}>
-                    <TouchableOpacity onPress={() => router.back()}>
+                    <TouchableOpacity onPress={() => router.back()} style={styles.arrowContainer}>
                         <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
                     </TouchableOpacity>
-                    <Text style={styles.titulo}>Cadastro</Text>
-                    <Text style={styles.subtitulo}>Aproveite o nosso aplicativo!!</Text>
+                    <View style={styles.textoContainer}>
+                        <Text style={styles.titulo}>Cadastro</Text>
+                        <Text style={styles.subtitulo}>Aproveite o nosso aplicativo!!</Text>
+                    </View>
                 </View>
 
                 <View style={styles.mainContainer}>
@@ -100,19 +102,28 @@ const styles = StyleSheet.create(
         },
         mainContainer: {
             flex: 1,
-            justifyContent: "center", // Centraliza verticalmente
-            alignItems: "center", // Centraliza horizontalmente
+            justifyContent: "center", 
+            alignItems: "center", 
             paddingHorizontal: 20,
             backgroundColor: "#F5F5F5",
         },
         cabecalho: {
             width: "100%",
             height: 180,
-            alignItems: "center",
             backgroundColor: "#AE77EA",
             paddingVertical: 40,
             paddingHorizontal: 20,
             borderRadius: 20,
+            flexDirection: "row",
+            alignItems: "flex-start",
+        },
+        arrowContainer: {
+            paddingRight: 10,
+            paddingTop: 5,
+        },
+        textoContainer: {
+            flex: 1,
+            alignItems: "center",
         },
         titulo: {
             fontSize: 40,

@@ -28,35 +28,39 @@ export default function EditarInfo() {
     const lugares = [
         {
             id: 1,
-            nome: 'Supermercado Sacolão',
-            categoria: 'Supermercado',
-            imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxHMWDyH43D04Wqs-URFR0jTbq9thSnEpbEhwt-_qiLNFgT34szJ5P5Ib7wU8TuChYxTiueHgIiLld1b7B21QOuiMplryJ01B2lzaPLiGrS_hd2mI07fY1ALe7S5-WIXBzRaUE=s1360-w1360-h1020-rw',
-            estrelas: 3.1,
+            nome: 'Soverteria Amigo',
+            endereco: 'Av. Olindo de Miranda - Almenara, MG, 39900-000',
+            imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzgHPVQ_zPS9T6O4SFlK_L7v7FDVBdeN8MXjFu6c25LoTqzgqa4GKZRezzA_QyHh4w4seNNT9ryAYuEZWVyRHECh4agpD5ELvu98OFyBRmHTmg46eE8MP_kdNSqMSsTgFPDm9PQCQ=s1360-w1360-h1020-rw',
+            estrelas: 4.5,
             cor: '#619FF0',
+            avaliacoes: 109,
         },
         {
             id: 2,
-            nome: 'Salão do Reino',
-            categoria: 'Igreja',
-            imagem: 'https://redepara.com.br/imagens/galeria/118801/thumbs/22b76cf0081c4cf791cd2e8a11c3b496.png',
-            estrelas: 4.9,
+            nome: 'Doçura',
+            endereco: 'R. Antônio Gil, 1-39 - Almenara, MG, 39900-000',
+            imagem: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/ec/42/ab/sorveteria-docura.jpg?w=500&h=-1&s=1',
+            estrelas: 4.7,
             cor: '#619FF0',
+            avaliacoes: 483,
         },
         {
             id: 3,
-            nome: 'Mineirão Atacarejo',
-            categoria: 'Supermercado',
-            imagem: 'https://cdn.samaisvarejo.com.br/portal/image/1714414600525-mineirao-atacarejo.jpeg',
-            estrelas: 4.2,
+            nome: 'Aeroaçaí',
+            endereco: 'Avenida Aeroporto, 2 - A Definir, Almenara - MG, 39900-000',
+            imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzgSskJDWuziOjvGeOihFXzcJJcB16P15I8X7Qo6uIQnV34PZiFUzxFge0ibNgWH0rT5UJVOZwbNlO5I344uh58SLhg_85ZPggXRlIEk2_iAeL8mpyQmQ0LcOP6vqQ5GV7qHusJ=s1360-w1360-h1020-rw',
+            estrelas: 4.6,
             cor: '#619FF0',
+            avaliacoes: 50,
         },
         {
             id: 4,
-            nome: 'Country Rock Bar',
-            categoria: 'Restaurante',
-            imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxTUuYGkX4-Df8YTGv4P68njbZEW5u07VDeinqBeQTfRpttBuhxlABS62ppkhL3TwgH6Yxnx_ZdXuesuvhXYUeHqdHkYHDO2IGMgA2nhGDCt_OKzOXE05rdPZz7Jsn-UxohdDv4=s1360-w1360-h1020-rw',
-            estrelas: 3.9,
+            nome: 'Mr SHAKE',
+            endereco: 'R. Bias Fortes, 372 - lj 1 - Almenara, MG, 39900-000',
+            imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSx84ND-v6q3Z_66MDwggeBnfFi_HzyXDDxhm9Ml6JRkf7-T_iyRN5kIwqYIbs5_gdfLLXPc-FBd2ehAlzJ3E0SbC7FHNvxie74da8pv4yicUbMSI3mIy-MKbEyuHZveqy5PMvmf=s1360-w1360-h1020-rw',
+            estrelas: 4.6,
             cor: '#619FF0',
+            avaliacoes: 25,
         },
     ];
     return (
@@ -64,11 +68,12 @@ export default function EditarInfo() {
             <ScrollView style={styles.conteiner} >
 
                 <View style={styles.cabecalho}>
-                    <TouchableOpacity onPress={() => router.back()}>
+                    <TouchableOpacity onPress={() => router.back()} style={styles.arrowContainer}>
                         <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
                     </TouchableOpacity>
-                    <Text style={styles.titulo}>Sorveterias</Text>
-
+                    <View style={styles.textoContainer}>
+                        <Text style={styles.titulo}>Sorveterias</Text>
+                    </View>
                 </View>
 
 
@@ -77,9 +82,9 @@ export default function EditarInfo() {
                         <CaixaLocais
                             key={lugar.id}
                             nome={lugar.nome}
-                            endereco={lugar.categoria}
+                            endereco={lugar.endereco}
                             avaliacao={lugar.estrelas}
-                            avaliacoes={Math.floor(Math.random() * 100)}
+                            avaliacoes={lugar.avaliacoes || 0}
                             imageUrl={
                                 lugar.imagem ||
                                 "https://via.placeholder.com/400x200.png?text=Sem+Imagem"
@@ -97,7 +102,7 @@ export default function EditarInfo() {
 }
 
 const styles = StyleSheet.create(
-    {   
+    {
         conteiner: {
             flex: 1,
             backgroundColor: "#F5F5F5",
@@ -112,11 +117,20 @@ const styles = StyleSheet.create(
         cabecalho: {
             width: "100%",
             height: 180,
-            alignItems: "center",
             backgroundColor: "#619FF0",
             paddingVertical: 40,
             paddingHorizontal: 20,
             borderRadius: 20,
+            flexDirection: "row",
+            alignItems: "flex-start",
+        },
+        arrowContainer: {
+            paddingRight: 10,
+            paddingTop: 5,
+        },
+        textoContainer: {
+            flex: 1,
+            alignItems: "center",
         },
         titulo: {
             fontSize: 40,

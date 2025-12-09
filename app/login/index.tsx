@@ -14,20 +14,20 @@ export default function Login() {
   const router = useRouter();
 
   const handleLogin = async () => {
-    // Validação simples: os dois campos devem estar preenchidos
+    // os campos devem estar preenchidos
     if (!email.trim() || !password.trim()) {
       Alert.alert('Atenção', 'Por favor preencha os campos de email e senha.');
       return;
     }
 
-    // Validação: email deve ser @gmail.com
+    // o email deve ser @gmail.com
     if (!email.endsWith('@gmail.com')) {
       Alert.alert('Email inválido', 'Por favor use um email @gmail.com');
       return;
     }
 
     setLoading(true);
-    // Simulate a login process and then navigate to tabs index
+    
     setTimeout(async () => {
       try {
         // Extrair nome do email (parte antes do @)

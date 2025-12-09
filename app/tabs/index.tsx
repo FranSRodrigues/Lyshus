@@ -45,34 +45,38 @@ export default function HomeScreen() {
     {
       id: 1,
       nome: 'Supermercado Sacolão',
-      categoria: 'Supermercados',
+      endereco: 'R. Hermano Souza, 246 - Centro, Almenara - MG, 39900-000',
       imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxHMWDyH43D04Wqs-URFR0jTbq9thSnEpbEhwt-_qiLNFgT34szJ5P5Ib7wU8TuChYxTiueHgIiLld1b7B21QOuiMplryJ01B2lzaPLiGrS_hd2mI07fY1ALe7S5-WIXBzRaUE=s1360-w1360-h1020-rw',
-      estrelas: 3.1,
+      estrelas: 4.1,
       cor: '#6AEE77',
+      avaliacoes: 318,
     },
     {
       id: 2,
       nome: 'Doçura',
-      categoria: 'Sorveterias',
+      endereco: 'R. Antônio Gil, 1-39 - Almenara, MG, 39900-000',
       imagem: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/ec/42/ab/sorveteria-docura.jpg?w=500&h=-1&s=1',
-      estrelas: 4.9,
+      estrelas: 4.7,
       cor: '#619FF0',
+      avaliacoes: 483,
     },
     {
       id: 3,
       nome: 'Mineirão Atacarejo',
-      categoria: 'Supermercado',
+      endereco: ' BR-367, KM113 , n°58 - A - Cidade Nova, Almenara - MG, 39900-000',
       imagem: 'https://cdn.samaisvarejo.com.br/portal/image/1714414600525-mineirao-atacarejo.jpeg',
-      estrelas: 4.2,
+      estrelas: 4.4,
       cor: '#6AEE77',
+      avaliacoes: 1106,
     },
     {
       id: 4,
       nome: 'Country Rock Bar',
-      categoria: 'Bares',
+      endereco: 'Tv. Liberdade, 25 - Centro, Almenara - MG, 39900-000',
       imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxTUuYGkX4-Df8YTGv4P68njbZEW5u07VDeinqBeQTfRpttBuhxlABS62ppkhL3TwgH6Yxnx_ZdXuesuvhXYUeHqdHkYHDO2IGMgA2nhGDCt_OKzOXE05rdPZz7Jsn-UxohdDv4=s1360-w1360-h1020-rw',
-      estrelas: 3.9,
+      estrelas: 4.6,
       cor: '#F2B579',
+      avaliacoes: 173,
     },
   ];
 
@@ -176,7 +180,7 @@ export default function HomeScreen() {
           <CaixaLocais
             key={lugar.id}
             nome={lugar.nome}
-            endereco={lugar.categoria}
+            endereco={lugar.endereco}
             avaliacao={lugar.estrelas}
             avaliacoes={Math.floor(Math.random() * 100)}
             imageUrl={
