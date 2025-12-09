@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+
 export default function App() {
   return (
     <View style={styles.container}>
@@ -8,13 +9,29 @@ export default function App() {
         <Text style={styles.textoSuperior}>
           <Ionicons name="person-outline" size={20} color="#fff"/>
           Usuário
-          </Text>
+        </Text>
       </View>
+
       <View style={styles.bolaBranca}>
-          <View style={styles.imagemUsuario}>
-              <Ionicons name="person-circle-outline" size={120} color="#B59AC4" />
-          </View>
-          <Text style={styles.textoCentral}>Usuário</Text>
+        <View style={styles.imagemUsuario}>
+          <Ionicons name="person-circle-outline" size={120} color="#B59AC4" />
+        </View>
+        <Text style={styles.textoCentral}>Usuário</Text>
+      </View>
+
+      <View style={styles.textosCentrais}>
+        <View style={styles.informacoes}>
+          <View style={styles.icone}><Ionicons name="at-outline" size={20} color="white" /></View>
+          <Text style={styles.text}>usuario@gmail.com</Text>
+        </View>
+        <View style={styles.informacoes}>
+          <View style={styles.icone}><Ionicons name="pencil-outline" size={20} color="white" /></View>
+          <Text style={styles.text}>Avaliações:</Text>
+        </View>
+        <View style={styles.informacoes}>
+          <View style={styles.icone}><Ionicons name="heart" size={20} color="white" /></View>
+          <Text style={styles.text}>Favoritos:</Text>
+        </View>
       </View>
     </View>
   );
@@ -44,7 +61,9 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   textoCentral: {
+    marginTop: 15,
     fontWeight: 'bold',
+    fontSize: 18,
   },
   bolaBranca: {
     width: 280,
@@ -66,5 +85,27 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     backgroundColor: '#FFFFFF',
   },
-
+  informacoes: {
+    fontSize: 18,
+    margin: 15,
+    marginStart: 15,
+    flexDirection: 'row',
+  },
+  text: {
+    fontSize: 18,
+    marginLeft: 20,
+    color: 'black',
+    marginTop: 10,
+  },
+  icone: {
+    backgroundColor: '#AE77EA',
+    borderRadius: 360,
+    height: 40,
+    width: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textosCentrais: {
+    marginTop: 15,
+  }
 });
