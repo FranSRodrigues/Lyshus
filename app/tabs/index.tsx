@@ -147,7 +147,7 @@ export default function HomeScreen() {
 
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#6AEE77' }]}
-          onPress={() => router.push('/categorias/supermecardos')}
+          onPress={() => router.push('/categorias/supermercados')}
         >
           <Ionicons name="cart-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Supermercados</Text>
