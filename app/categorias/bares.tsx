@@ -28,35 +28,39 @@ export default function EditarInfo() {
     const lugares = [
         {
             id: 1,
-            nome: 'Supermercado Sacolão',
-            categoria: 'Supermercado',
-            imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxHMWDyH43D04Wqs-URFR0jTbq9thSnEpbEhwt-_qiLNFgT34szJ5P5Ib7wU8TuChYxTiueHgIiLld1b7B21QOuiMplryJ01B2lzaPLiGrS_hd2mI07fY1ALe7S5-WIXBzRaUE=s1360-w1360-h1020-rw',
-            estrelas: 3.1,
-            cor: '#6AEE77',
+            nome: 'Varanda Do Espeto',
+            endereco: 'R. Bias Fortes, 778 - Centro, Almenara - MG, 39900-000',
+            imagem: 'https://lh3.googleusercontent.com/p/AF1QipPdOWKm9Wu0P-fxyUjDo46fAUfjKGXkShVtC0nF=s1360-w1360-h1020-rw',
+            estrelas: 4.6,
+            cor: '#F2B579',
+            avaliacoes: 342,
         },
         {
             id: 2,
-            nome: 'Salão do Reino',
-            categoria: 'Igreja',
-            imagem: 'https://redepara.com.br/imagens/galeria/118801/thumbs/22b76cf0081c4cf791cd2e8a11c3b496.png',
-            estrelas: 4.9,
-            cor: '#6AEE77',
+            nome: 'NOSSA CASA ESPETERIA E CIA',
+            endereco: 'Av. Olindo de Miranda, 535 - CENTRO, Almenara - MG, 39900-000',
+            imagem: 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=6d_OqxbfR5StXTiPYzgbNw&cb_client=search.gws-prod.gps&yaw=287.9493&pitch=0&thumbfov=100&w=325&h=218',
+            estrelas: 4.7,
+            cor: '#F2B579',
+            avaliacoes: 18,
         },
         {
             id: 3,
-            nome: 'Mineirão Atacarejo',
-            categoria: 'Supermercado',
-            imagem: 'https://cdn.samaisvarejo.com.br/portal/image/1714414600525-mineirao-atacarejo.jpeg',
-            estrelas: 4.2,
-            cor: '#6AEE77',
+            nome: 'Casa Blanca Happy Hour Bar',
+            endereco: 'Av. Dr. Carmosino Ferreira Costa - Almenara, MG, 39900-000',
+            imagem: 'https://lh3.googleusercontent.com/p/AF1QipPZofsrV_lpvSQ3Ykizdo-0KOHcfHgU-CF949xc=s1360-w1360-h1020-rw',
+            estrelas: 4.6,
+            cor: '#F2B579',
+            avaliacoes: 8,
         },
         {
             id: 4,
             nome: 'Country Rock Bar',
-            categoria: 'Restaurante',
+            endereco: 'Tv. Liberdade, 25 - Centro, Almenara - MG, 39900-000',
             imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxTUuYGkX4-Df8YTGv4P68njbZEW5u07VDeinqBeQTfRpttBuhxlABS62ppkhL3TwgH6Yxnx_ZdXuesuvhXYUeHqdHkYHDO2IGMgA2nhGDCt_OKzOXE05rdPZz7Jsn-UxohdDv4=s1360-w1360-h1020-rw',
-            estrelas: 3.9,
-            cor: '#6AEE77',
+            estrelas: 4.6,
+            cor: '#F2B579',
+            avaliacoes: 173,
         },
     ];
     return (
@@ -64,22 +68,22 @@ export default function EditarInfo() {
             <ScrollView style={styles.conteiner} >
 
                 <View style={styles.cabecalho}>
-                    <TouchableOpacity onPress={() => router.back()}>
+                    <TouchableOpacity onPress={() => router.back()} style={styles.arrowContainer}>
                         <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
                     </TouchableOpacity>
-                    <Text style={styles.titulo}>Supermercados</Text>
-
+                    <View style={styles.textoContainer}>
+                        <Text style={styles.titulo}>Bares</Text>
+                    </View>
                 </View>
-
-
+    
                 <View style={{ paddingVertical: 20, gap: 20, alignItems: "center" }}>
                     {lugares.map((lugar) => (
                         <CaixaLocais
                             key={lugar.id}
                             nome={lugar.nome}
-                            endereco={lugar.categoria}
+                            endereco={lugar.endereco}
                             avaliacao={lugar.estrelas}
-                            avaliacoes={Math.floor(Math.random() * 100)}
+                            avaliacoes={lugar.avaliacoes || 0}
                             imageUrl={
                                 lugar.imagem ||
                                 "https://via.placeholder.com/400x200.png?text=Sem+Imagem"
@@ -97,7 +101,7 @@ export default function EditarInfo() {
 }
 
 const styles = StyleSheet.create(
-    {   
+    {
         conteiner: {
             flex: 1,
             backgroundColor: "#F5F5F5",
@@ -109,14 +113,23 @@ const styles = StyleSheet.create(
             paddingHorizontal: 20,
             backgroundColor: "#F5F5F5",
         },
-        cabecalho: {
+         cabecalho: {
             width: "100%",
             height: 180,
-            alignItems: "center",
-            backgroundColor: "#6AEE77",
+            backgroundColor: "#F2B579",
             paddingVertical: 40,
             paddingHorizontal: 20,
             borderRadius: 20,
+            flexDirection: "row",
+            alignItems: "flex-start",
+        },
+        arrowContainer: {
+            paddingRight: 10,
+            paddingTop: 5,
+        },
+        textoContainer: {
+            flex: 1,
+            alignItems: "center",
         },
         titulo: {
             fontSize: 40,

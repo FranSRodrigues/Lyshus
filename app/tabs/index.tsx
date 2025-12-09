@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CaixaLocais from "@components/caixaLocais";
 import {
   View,
@@ -10,13 +10,33 @@ import {
   Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen() {
   const [menuVisible, setMenuVisible] = useState(false);
   const [search, setSearch] = useState('');
+  const [userName, setUserName] = useState('User');
 
   const router = useRouter();
+
+  // Carregar nome do usuário quando a tela recebe foco
+  useFocusEffect(
+    React.useCallback(() => {
+      const loadUserName = async () => {
+        try {
+          const savedName = await AsyncStorage.getItem('userName');
+          if (savedName) {
+            setUserName(savedName);
+          }
+        } catch (error) {
+          console.error('Erro ao carregar nome do usuário:', error);
+        }
+      };
+      loadUserName();
+    }, [])
+  );
+
   const handleCategoryPress = (name: string) => {
     alert(`Você clicou em ${name}!`);
   };
@@ -25,34 +45,38 @@ export default function HomeScreen() {
     {
       id: 1,
       nome: 'Supermercado Sacolão',
-      categoria: 'Supermercados',
+      endereco: 'R. Hermano Souza, 246 - Centro, Almenara - MG, 39900-000',
       imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxHMWDyH43D04Wqs-URFR0jTbq9thSnEpbEhwt-_qiLNFgT34szJ5P5Ib7wU8TuChYxTiueHgIiLld1b7B21QOuiMplryJ01B2lzaPLiGrS_hd2mI07fY1ALe7S5-WIXBzRaUE=s1360-w1360-h1020-rw',
-      estrelas: 3.1,
+      estrelas: 4.1,
       cor: '#6AEE77',
+      avaliacoes: 318,
     },
     {
       id: 2,
       nome: 'Doçura',
-      categoria: 'Sorveterias',
+      endereco: 'R. Antônio Gil, 1-39 - Almenara, MG, 39900-000',
       imagem: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/ec/42/ab/sorveteria-docura.jpg?w=500&h=-1&s=1',
-      estrelas: 4.9,
+      estrelas: 4.7,
       cor: '#619FF0',
+      avaliacoes: 483,
     },
     {
       id: 3,
       nome: 'Mineirão Atacarejo',
-      categoria: 'Supermercado',
+      endereco: ' BR-367, KM113 , n°58 - A - Cidade Nova, Almenara - MG, 39900-000',
       imagem: 'https://cdn.samaisvarejo.com.br/portal/image/1714414600525-mineirao-atacarejo.jpeg',
-      estrelas: 4.2,
+      estrelas: 4.4,
       cor: '#6AEE77',
+      avaliacoes: 1106,
     },
     {
       id: 4,
       nome: 'Country Rock Bar',
-      categoria: 'Bares',
+      endereco: 'Tv. Liberdade, 25 - Centro, Almenara - MG, 39900-000',
       imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxTUuYGkX4-Df8YTGv4P68njbZEW5u07VDeinqBeQTfRpttBuhxlABS62ppkhL3TwgH6Yxnx_ZdXuesuvhXYUeHqdHkYHDO2IGMgA2nhGDCt_OKzOXE05rdPZz7Jsn-UxohdDv4=s1360-w1360-h1020-rw',
-      estrelas: 3.9,
+      estrelas: 4.6,
       cor: '#F2B579',
+      avaliacoes: 173,
     },
   ];
 
@@ -62,7 +86,7 @@ export default function HomeScreen() {
       <View style={styles.header}>
         <View style={styles.headerRow}>
           <View>
-            <Text style={styles.headerTitle}>Hi, User!</Text>
+            <Text style={styles.headerTitle}>Olá, {userName}!</Text>
             <Text style={styles.headerSubtitle}>lyshus</Text>
           </View>
 
@@ -80,7 +104,10 @@ export default function HomeScreen() {
             <Text style={styles.menuText}>Editar informações</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.menuItem}>
+          <TouchableOpacity style={styles.menuItem} onPress={async () => {
+            await AsyncStorage.multiRemove(['userEmail', 'userName', 'isLoggedIn']);
+            router.replace('/login');
+          }}>
             <Ionicons name="log-out-outline" size={18} color="#000" />
             <Text style={styles.menuText}>Sair da conta</Text>
           </TouchableOpacity>
@@ -107,7 +134,7 @@ export default function HomeScreen() {
       <View style={styles.categoriesContainer}>
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#FF5151' }]}
-          onPress={() => router.push('/tabs/restaurantes')}
+          onPress={() => router.push('/categorias/restaurantes')}
         >
           <Ionicons name="restaurant-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Restaurantes</Text>
@@ -115,7 +142,7 @@ export default function HomeScreen() {
 
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#FFD665' }]}
-          onPress={() => router.push('/tabs/hoteis')}
+          onPress={() => router.push('/categorias/hoteis')}
         >
           <Ionicons name="restaurant-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Hoteis</Text>
@@ -123,7 +150,7 @@ export default function HomeScreen() {
 
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#6AEE77' }]}
-          onPress={() => router.push('/tabs/supermecardos')}
+          onPress={() => router.push('/categorias/supermecardos')}
         >
           <Ionicons name="restaurant-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Supermercados</Text>
@@ -131,7 +158,7 @@ export default function HomeScreen() {
 
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#F2B579' }]}
-          onPress={() => router.push('/tabs/bares')}
+          onPress={() => router.push('/categorias/bares')}
         >
           <Ionicons name="beer-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Bares</Text>
@@ -139,7 +166,7 @@ export default function HomeScreen() {
 
         <TouchableOpacity
           style={[styles.categoryButton, { backgroundColor: '#619FF0' }]}
-          onPress={() => router.push('/tabs/sorveterias')}
+          onPress={() => router.push('/categorias/sorveterias')}
         >
           <Ionicons name="ice-cream-outline" size={24} color="#fff" />
           <Text style={styles.categoryText}>Sorveterias</Text>
@@ -153,7 +180,7 @@ export default function HomeScreen() {
           <CaixaLocais
             key={lugar.id}
             nome={lugar.nome}
-            endereco={lugar.categoria}
+            endereco={lugar.endereco}
             avaliacao={lugar.estrelas}
             avaliacoes={Math.floor(Math.random() * 100)}
             imageUrl={

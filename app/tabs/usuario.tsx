@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import * as Linking from 'expo-linking';
 
 export default function App() {
   return (
@@ -23,16 +22,16 @@ export default function App() {
       <View style={styles.textosCentrais}>
         <View style={styles.informacoes}>
           <View style={styles.icone}><Ionicons name="at-outline" size={20} color="white" /></View>
-        <Text style={styles.text}><></>usuario@gmail.com</Text>
-      </View>
-      <View style={styles.informacoes}>
+          <Text style={styles.text}>usuario@gmail.com</Text>
+        </View>
+        <View style={styles.informacoes}>
           <View style={styles.icone}><Ionicons name="pencil-outline" size={20} color="white" /></View>
-        <Text style={styles.text}>Avaliações:</Text>
-      </View>
-      <View style={styles.informacoes}>
+          <Text style={styles.text}>Avaliações:</Text>
+        </View>
+        <View style={styles.informacoes}>
           <View style={styles.icone}><Ionicons name="heart" size={20} color="white" /></View>
-        <Text style={styles.text}>Favoritos:</Text>
-      </View>
+          <Text style={styles.text}>Favoritos:</Text>
+        </View>
       </View>
     </View>
   );
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   textoCentral: {
-    paddingTop: 15,
+    marginTop: 15,
     fontWeight: 'bold',
     fontSize: 18,
   },

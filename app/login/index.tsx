@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from "rea
 import FloatingInput from "@components/input";
 import { ButtonRoxo } from "@components/buttonLogin";
 import { useRouter } from "expo-router";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function Login() {
@@ -12,18 +13,40 @@ export default function Login() {
 
   const router = useRouter();
 
-  const handleLogin = () => {
-    // Validação simples: os dois campos devem estar preenchidos
+  const handleLogin = async () => {
+    // os campos devem estar preenchidos
     if (!email.trim() || !password.trim()) {
       Alert.alert('Atenção', 'Por favor preencha os campos de email e senha.');
       return;
     }
 
+    // o email deve ser @gmail.com
+    if (!email.endsWith('@gmail.com')) {
+      Alert.alert('Email inválido', 'Por favor use um email @gmail.com');
+      return;
+    }
+
     setLoading(true);
-    // Simulate a login process and then navigate to tabs index
-    setTimeout(() => {
-      setLoading(false);
-      router.push('/tabs');
+    
+    setTimeout(async () => {
+      try {
+        // Extrair nome do email (parte antes do @)
+        const userName = email.split('@')[0];
+        
+        // Salvar dados no AsyncStorage
+        await AsyncStorage.multiSet([
+          ['userEmail', email],
+          ['userName', userName],
+          ['isLoggedIn', 'true']
+        ]);
+        
+        setLoading(false);
+        router.push('/tabs');
+      } catch (error) {
+        console.error('Erro ao salvar dados:', error);
+        setLoading(false);
+        Alert.alert('Erro', 'Não foi possível salvar os dados.');
+      }
     }, 1500);
 
   }
