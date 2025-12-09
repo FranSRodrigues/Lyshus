@@ -17,7 +17,7 @@ export default function AvaliarScreen() {
   const router = useRouter();
   const params = useLocalSearchParams();
   const nome = decodeURIComponent(String(params.nome || ''));
-  
+
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [userName, setUserName] = useState('Usuário');
@@ -74,6 +74,42 @@ export default function AvaliarScreen() {
       estrelas: 4.6,
       cor: '#F2B579',
       avaliacoes: 173,
+    },
+    {
+      id: 5,
+      nome: 'Restaurante O Gauchão',
+      endereco: 'Av. Olindo de Miranda, 650 - Centro, Almenara - MG, 39900-000',
+      imagem: "https://lh3.googleusercontent.com/p/AF1QipNALn9S7NTqHisrM-Fjc-3mLZ5UdtrSWxxaTEvS=s1360-w1360-h1020-rw",
+      estrelas: 4.3,
+      cor: '#FF5151',
+      avaliacoes: 459,
+    },
+    {
+      id: 6,
+      nome: 'Pousada Sol Nascente',
+      endereco: 'Av. Olindo de Miranda, 700 - Almenara, MG, 39900-000',
+      imagem: 'https://lh3.googleusercontent.com/p/AF1QipPmF8uxGps7NwA_PjMUga0HGzBjyHI3NeWeRh-W=s1360-w1360-h1020-rw',
+      estrelas: 4.0,
+      cor: '#FFD665',
+      avaliacoes: 609,
+    },
+    {
+      id: 7,
+      nome: 'Varanda Do Espeto',
+      endereco: 'R. Bias Fortes, 778 - Centro, Almenara - MG, 39900-000',
+      imagem: 'https://lh3.googleusercontent.com/p/AF1QipPdOWKm9Wu0P-fxyUjDo46fAUfjKGXkShVtC0nF=s1360-w1360-h1020-rw',
+      estrelas: 4.6,
+      cor: '#F2B579',
+      avaliacoes: 342,
+    },
+    {
+      id: 8,
+      nome: 'Soverteria Amigo',
+      endereco: 'Av. Olindo de Miranda - Almenara, MG, 39900-000',
+      imagem: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzgHPVQ_zPS9T6O4SFlK_L7v7FDVBdeN8MXjFu6c25LoTqzgqa4GKZRezzA_QyHh4w4seNNT9ryAYuEZWVyRHECh4agpD5ELvu98OFyBRmHTmg46eE8MP_kdNSqMSsTgFPDm9PQCQ=s1360-w1360-h1020-rw',
+      estrelas: 4.5,
+      cor: '#619FF0',
+      avaliacoes: 109,
     },
   ];
 
