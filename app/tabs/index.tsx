@@ -20,7 +20,6 @@ export default function HomeScreen() {
 
   const router = useRouter();
 
-  // Carregar nome do usuário quando a tela recebe foco
   useFocusEffect(
     React.useCallback(() => {
       const loadUserName = async () => {
@@ -173,20 +172,18 @@ export default function HomeScreen() {
 
       <View style={{ paddingVertical: 20, gap: 20, alignItems: "center" }}>
         {lugares.map((lugar) => (
-          <CaixaLocais
-            key={lugar.id}
-            nome={lugar.nome}
-            endereco={lugar.categoria}
-            avaliacao={lugar.estrelas}
-            avaliacoes={Math.floor(Math.random() * 100)}
-            imageUrl={
-              lugar.imagem ||
-              "https://via.placeholder.com/400x200.png?text=Sem+Imagem"
-            }
-            onPress={() => console.log(`Avaliar ${lugar.nome}`)}
-            cor={lugar.cor}
-          />
-        ))}
+        <CaixaLocais
+        key={lugar.id}
+        nome={lugar.nome}
+        endereco={lugar.categoria}
+        imageUrl={
+      lugar.imagem ||
+      "https://via.placeholder.com/400x200.png?text=Sem+Imagem"
+    }
+    cor={lugar.cor}
+  />
+))}
+
       </View>
 
 

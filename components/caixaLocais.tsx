@@ -1,29 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { useRouter } from "expo-router";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface Props {
   nome: string;
   endereco: string;
-  avaliacao: number;
-  avaliacoes: number;
   imageUrl: string;
-  onPress: () => void;
   cor?: string;
 }
 
-export default function CaixaLocais({ nome, endereco, avaliacao, avaliacoes, imageUrl, onPress, cor = '#AE77EA' }: Props) {
+export default function CaixaLocais({
+  nome,
+  endereco,
+  imageUrl,
+  cor = '#AE77EA'
+}: Props) {
+
+  const router = useRouter();
+
+  const [media, setMedia] = useState(0);
+  const [quantidade, setQuantidade] = useState(0);
+
+  // Carregar avaliações do AsyncStorage
+  useEffect(() => {
+    async function carregarAvaliacoes() {
+      try {
+        const data = await AsyncStorage.getItem("AVALIACOES");
+        if (!data) return;
+
+        const json = JSON.parse(data);
+        const lista = json[nome] || [];
+
+        if (lista.length > 0) {
+          const avg = lista.reduce((a: number, b: number) => a + b, 0) / lista.length;
+          setMedia(avg);
+          setQuantidade(lista.length);
+        }
+      } catch (e) {
+        console.log("Erro ao carregar avaliações:", e);
+      }
+    }
+
+    carregarAvaliacoes();
+  }, [nome]);
+
+  const handleAvaliacao = () => {
+    try {
+      const safeNome = encodeURIComponent(String(nome));
+      (router as any)?.push?.(`/avaliar?nome=${safeNome}`);
+    } catch (error) {
+      console.error("Erro ao navegar:", error);
+    }
+  };
+
   return (
     <View style={[styles.card, { backgroundColor: cor }]}>
       <Image source={{ uri: imageUrl }} style={styles.cardImage} resizeMode="cover" />
+
       <View style={styles.cardInfo}>
         <Text style={styles.cardTitle}>{nome}</Text>
         <Text style={styles.cardSubtitle}>{endereco}</Text>
+
         <View style={styles.starRow}>
-          <Text style={styles.avaliacaoText}>★ {avaliacao.toFixed(1)}</Text>
-          <Text style={styles.avaliacoesText}>{avaliacoes} avaliações</Text>
+          <Text style={styles.avaliacaoText}>★ {media.toFixed(1)}</Text>
+          <Text style={styles.avaliacoesText}>{quantidade} avaliações</Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.avaliarButton} onPress={onPress}>
+
+      <TouchableOpacity
+        style={styles.avaliarButton}
+        onPress={handleAvaliacao}
+      >
         <Text style={styles.avaliarButtonText}>Avaliar</Text>
       </TouchableOpacity>
     </View>
@@ -55,11 +103,11 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#ffffffff',
+    color: '#fff',
     marginBottom: 4,
   },
   cardSubtitle: {
-    color: '#ffffffff',
+    color: '#fff',
     fontSize: 13,
     marginBottom: 8,
   },
@@ -77,7 +125,7 @@ const styles = StyleSheet.create({
     color: '#f3f046',
     fontSize: 13,
   },
-   avaliarButton: {
+  avaliarButton: {
     backgroundColor: '#D9D9D9',
     paddingHorizontal: 16,
     paddingVertical: 8,
@@ -87,7 +135,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   avaliarButtonText: {
-    color: '#000000ff',
+    color: '#000',
     fontWeight: '600',
     fontSize: 14,
   },
